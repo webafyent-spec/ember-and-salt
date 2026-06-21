@@ -112,60 +112,202 @@ import '../styles/global.css';
       </div>
     </div>
 
-    <!-- Right 45% — wood frame + CSS fire -->
-    <div class="w-full md:w-[45%] relative flex items-center justify-center" style="min-height:400px;">
+    <!-- Right 45% — hero fire scene -->
+    <div class="w-full md:w-[45%] relative flex items-center justify-center" style="min-height:420px;">
 
-      <!-- Outer glow halo -->
-      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,98,45,0.22) 0%,rgba(255,120,0,0.06) 45%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glowPulse 3s ease-in-out infinite;"></div>
+      <!-- Wide outer ember halo -->
+      <div style="position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(196,98,45,0.18) 0%,rgba(255,80,0,0.05) 50%,transparent 72%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-breathe 3.5s ease-in-out infinite;"></div>
 
       <!-- Wood-framed blob container -->
       <div class="fade-up stagger-3 relative" style="
-        width:min(400px,88vw);
-        height:min(460px,80vw);
+        width:min(420px,90vw);
+        height:min(500px,85vw);
         clip-path:polygon(14% 1%,84% 2%,98% 16%,96% 84%,82% 99%,16% 98%,2% 82%,4% 16%);
         overflow:hidden;
       ">
-        <!-- Wood grain background -->
-        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.9;"></div>
+        <!-- Wood grain base -->
+        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.85;"></div>
 
-        <!-- Dark overlay for atmosphere -->
-        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,4,2,0.6) 0%,rgba(20,8,3,0.3) 40%,rgba(10,4,2,0.7) 100%);"></div>
+        <!-- Very dark cave atmosphere — fire is the only light source -->
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,1,0,0.88) 0%,rgba(8,3,1,0.55) 45%,rgba(4,1,0,0.35) 100%);"></div>
 
-        <!-- Char burn edges -->
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,0.55) 100%);"></div>
+        <!-- Char vignette around edges -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 42%,rgba(0,0,0,0.72) 100%);"></div>
 
-        <!-- CSS fire sitting on logs -->
-        <div style="position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:100%;display:flex;flex-direction:column;align-items:center;gap:0;">
+        <!-- ── FIRE SCENE ───────────────────────── -->
+        <!-- Everything is positioned from the bottom, anchored to the coal bed -->
+        <div id="hero-fire-scene" style="position:absolute;bottom:14%;left:50%;transform:translateX(-50%);width:240px;">
 
-          <!-- Logs / coals base -->
-          <div style="display:flex;gap:6px;margin-bottom:4px;z-index:2;position:relative;">
-            <div class="ember-coal" style="width:70px;height:16px;transform:rotate(-8deg);"></div>
-            <div class="ember-coal" style="width:80px;height:18px;transform:rotate(5deg) translateY(-3px);"></div>
-            <div class="ember-coal" style="width:60px;height:14px;transform:rotate(-3deg);"></div>
+          <!-- Ground heat pool glow — wide, low, orange -->
+          <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:320px;height:80px;background:radial-gradient(ellipse,rgba(255,100,0,0.55) 0%,rgba(200,50,0,0.25) 45%,transparent 72%);animation:glow-breathe 2s ease-in-out infinite;pointer-events:none;"></div>
+
+          <!-- ── SMOKE WISPS (above flames) ──────── -->
+          <!-- wisp 1 — centre -->
+          <div style="position:absolute;bottom:175px;left:50%;width:80px;height:80px;background:radial-gradient(circle,rgba(160,130,110,0.2) 0%,transparent 70%);animation:smoke-rise 4s ease-out infinite;animation-delay:0s;pointer-events:none;"></div>
+          <!-- wisp 2 — left -->
+          <div style="position:absolute;bottom:155px;left:28%;width:60px;height:60px;background:radial-gradient(circle,rgba(150,120,100,0.15) 0%,transparent 70%);animation:smoke-rise-b 3.5s ease-out infinite;animation-delay:0.8s;pointer-events:none;"></div>
+          <!-- wisp 3 — right -->
+          <div style="position:absolute;bottom:165px;left:62%;width:70px;height:70px;background:radial-gradient(circle,rgba(160,130,110,0.18) 0%,transparent 70%);animation:smoke-rise 5s ease-out infinite;animation-delay:1.6s;pointer-events:none;"></div>
+          <!-- wisp 4 — wide slow -->
+          <div style="position:absolute;bottom:140px;left:50%;width:100px;height:100px;background:radial-gradient(circle,rgba(140,110,90,0.1) 0%,transparent 70%);animation:smoke-rise-b 6s ease-out infinite;animation-delay:2.4s;pointer-events:none;"></div>
+
+          <!-- ── FLAME TONGUES ────────────────────── -->
+          <!-- All tongues share bottom:0 (anchored to coal bed). Each has unique animation + size. -->
+
+          <!-- Far-left wisp tongue -->
+          <div style="
+            position:absolute;bottom:0;left:14%;
+            width:38px;height:110px;
+            background:radial-gradient(ellipse at 50% 100%,#FF7010 0%,#D83500 45%,rgba(180,20,0,0.4) 75%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-wisp-l 2.1s ease-in-out infinite;
+            filter:blur(3px);
+            opacity:0.55;
+          "></div>
+
+          <!-- Left tongue -->
+          <div style="
+            position:absolute;bottom:0;left:24%;
+            width:58px;height:155px;
+            background:radial-gradient(ellipse at 50% 100%,#FF8020 0%,#E84000 30%,#C02000 62%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-left 1.9s ease-in-out infinite;
+            filter:blur(2px);
+            opacity:0.88;
+          "></div>
+          <!-- Left tongue inner -->
+          <div style="
+            position:absolute;bottom:0;left:24%;
+            width:36px;height:100px;
+            background:radial-gradient(ellipse at 50% 100%,#FFD040 0%,#FF9020 45%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-left 1.55s ease-in-out infinite reverse;
+            filter:blur(1px);
+            opacity:0.8;
+          "></div>
+
+          <!-- Centre tongue — tallest, most prominent -->
+          <div style="
+            position:absolute;bottom:0;left:50%;
+            width:78px;height:215px;
+            background:radial-gradient(ellipse at 50% 100%,#FF6500 0%,#E03500 28%,#B81800 58%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-center 1.7s ease-in-out infinite;
+            filter:blur(2.5px);
+            opacity:0.95;
+          "></div>
+          <!-- Centre mid layer -->
+          <div style="
+            position:absolute;bottom:0;left:50%;
+            width:55px;height:175px;
+            background:radial-gradient(ellipse at 50% 100%,#FFB020 0%,#FF7000 35%,#E03200 68%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-center 1.3s ease-in-out infinite reverse;
+            filter:blur(1.5px);
+            opacity:0.9;
+          "></div>
+          <!-- Centre inner hot core -->
+          <div style="
+            position:absolute;bottom:0;left:50%;
+            width:34px;height:130px;
+            background:radial-gradient(ellipse at 50% 100%,#FFF0A0 0%,#FFD040 35%,#FF9020 65%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-center 1.05s ease-in-out infinite;
+            filter:blur(0.8px);
+            opacity:0.85;
+          "></div>
+          <!-- Centre white-hot tip -->
+          <div style="
+            position:absolute;bottom:0;left:50%;
+            width:16px;height:80px;
+            background:radial-gradient(ellipse at 50% 100%,#FFFFFF 0%,#FFFBE0 30%,#FFE060 60%,transparent 100%);
+            border-radius:50% 50% 30% 30%;
+            transform-origin:bottom center;
+            animation:tongue-center 0.82s ease-in-out infinite reverse;
+            filter:blur(0.4px);
+            opacity:0.7;
+          "></div>
+
+          <!-- Right tongue -->
+          <div style="
+            position:absolute;bottom:0;left:56%;
+            width:62px;height:165px;
+            background:radial-gradient(ellipse at 50% 100%,#FF7820 0%,#E04000 32%,#C02200 64%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-right 2.05s ease-in-out infinite;
+            filter:blur(2px);
+            opacity:0.86;
+          "></div>
+          <!-- Right tongue inner -->
+          <div style="
+            position:absolute;bottom:0;left:56%;
+            width:38px;height:108px;
+            background:radial-gradient(ellipse at 50% 100%,#FFD040 0%,#FF9020 42%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-right 1.6s ease-in-out infinite reverse;
+            filter:blur(1px);
+            opacity:0.78;
+          "></div>
+
+          <!-- Far-right wisp tongue -->
+          <div style="
+            position:absolute;bottom:0;left:70%;
+            width:40px;height:105px;
+            background:radial-gradient(ellipse at 50% 100%,#FF6010 0%,#D53000 48%,rgba(170,15,0,0.35) 78%,transparent 100%);
+            border-radius:50% 50% 28% 28%;
+            transform-origin:bottom center;
+            animation:tongue-wisp-r 2.3s ease-in-out infinite;
+            filter:blur(3px);
+            opacity:0.5;
+          "></div>
+
+          <!-- Heat shimmer layer over all flames -->
+          <div style="
+            position:absolute;bottom:0;left:50%;
+            width:160px;height:220px;
+            background:radial-gradient(ellipse at 50% 60%,rgba(255,160,60,0.04) 0%,transparent 70%);
+            border-radius:50% 50% 30% 30%;
+            transform-origin:bottom center;
+            animation:heat-wave 2.8s ease-in-out infinite;
+            pointer-events:none;
+          "></div>
+
+          <!-- ── COAL BED ─────────────────────────── -->
+          <div style="position:relative;z-index:10;display:flex;align-items:flex-end;gap:4px;padding:0 8px;">
+            <!-- Log 1 — back left, angled -->
+            <div class="ember-coal" style="width:90px;height:20px;border-radius:10px;transform:rotate(-9deg) translateY(4px);animation-delay:0s;"></div>
+            <!-- Log 2 — front centre, thick -->
+            <div class="ember-coal" style="width:100px;height:24px;border-radius:12px;transform:rotate(4deg) translateY(-2px);animation-delay:0.6s;z-index:2;"></div>
+            <!-- Log 3 — back right -->
+            <div class="ember-coal" style="width:75px;height:18px;border-radius:9px;transform:rotate(-5deg) translateY(5px);animation-delay:1.2s;"></div>
           </div>
 
-          <!-- The CSS fire -->
-          <div class="css-fire fire-panel-wrap" id="hero-fire" style="width:120px;height:160px;">
-            <div class="fire-glow" style="width:200px;height:100px;"></div>
-            <div class="fire-layer fire-base" style="width:100%;height:100%;"></div>
-            <div class="fire-layer fire-mid"></div>
-            <div class="fire-layer fire-inner"></div>
-            <div class="fire-layer fire-tip"></div>
+          <!-- Glowing ember dots on coal bed -->
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:11;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#FF8020;animation:ember-dot 1.4s ease-in-out infinite;animation-delay:0s;"></div>
+            <div style="width:4px;height:4px;border-radius:50%;background:#FFA030;animation:ember-dot 1.8s ease-in-out infinite;animation-delay:0.4s;"></div>
+            <div style="width:7px;height:7px;border-radius:50%;background:#FF6010;animation:ember-dot 1.2s ease-in-out infinite;animation-delay:0.9s;"></div>
+            <div style="width:5px;height:5px;border-radius:50%;background:#FFBB40;animation:ember-dot 2s ease-in-out infinite;animation-delay:0.2s;"></div>
+            <div style="width:4px;height:4px;border-radius:50%;background:#FF7020;animation:ember-dot 1.6s ease-in-out infinite;animation-delay:1.1s;"></div>
           </div>
         </div>
 
-        <!-- Text overlay -->
-        <div style="position:absolute;top:12%;width:100%;text-align:center;padding:0 2rem;">
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cream);opacity:0.55;margin:0;">[Food Photography]</p>
-          <p style="font-family:'Jost',sans-serif;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;opacity:0.6;">Coming Soon</p>
-        </div>
-
-        <!-- Bottom char gradient -->
-        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,rgba(5,2,1,0.85),transparent);"></div>
+        <!-- Bottom fade to black (floor of scene) -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:16%;background:linear-gradient(to top,rgba(3,1,0,0.95),transparent);pointer-events:none;"></div>
+        <!-- Top vignette keeps dark ceiling -->
+        <div style="position:absolute;top:0;left:0;right:0;height:28%;background:linear-gradient(to bottom,rgba(3,1,0,0.9),transparent);pointer-events:none;"></div>
       </div>
 
-      <!-- Small fire detail glow -->
-      <div style="position:absolute;bottom:22%;left:50%;transform:translateX(-50%);width:180px;height:60px;background:radial-gradient(ellipse,rgba(255,100,0,0.4) 0%,transparent 70%);pointer-events:none;animation:glowPulse 1.8s ease-in-out infinite;"></div>
+      <!-- Floating outer glow synced to fire -->
+      <div style="position:absolute;bottom:16%;left:50%;transform:translateX(-50%);width:220px;height:80px;background:radial-gradient(ellipse,rgba(255,100,0,0.45) 0%,transparent 70%);pointer-events:none;animation:glow-breathe 1.9s ease-in-out infinite;"></div>
     </div>
   </div>
 
