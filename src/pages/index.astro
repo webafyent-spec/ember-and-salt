@@ -11,8 +11,6 @@ import '../styles/global.css';
   <title>Ember & Salt — Fire. Flavour. Florida Road. | Berea, Durban</title>
   <meta name="description" content="Wood-fire cooking on Florida Road, Berea, Durban. Local ingredients. Good people. Reserve your table at Ember & Salt." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-
-  <!-- Preload fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" />
@@ -25,20 +23,24 @@ import '../styles/global.css';
      NAVIGATION
 ═══════════════════════════════════════════ -->
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between">
-  <!-- Logo -->
-  <a href="#home" class="flex items-center gap-2 no-underline">
-    <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 0C10 0 4 6 4 13C4 16.866 6.686 20 10 20C13.314 20 16 16.866 16 13C16 10 14 7.5 12.5 6C12.5 6 13 9 11 11C11 11 11.5 7 10 4C10 4 8 7 8.5 10C7 8.5 6 6 6 6C4.5 8 4 10.5 4 13" fill="#C4622D"/>
-      <path d="M7 14C7 14 7.5 17 10 18C12.5 17 13 14 13 14C13 14 12 16 10 16C8 16 7 14 7 14Z" fill="#E07848"/>
-      <line x1="10" y1="20" x2="10" y2="24" stroke="#C4622D" stroke-width="1.5"/>
-      <line x1="7" y1="23" x2="13" y2="23" stroke="#C4622D" stroke-width="1.5"/>
+  <a href="#home" class="flex items-center gap-3 no-underline group">
+    <!-- Animated flickering flame SVG -->
+    <svg class="nav-flame" width="18" height="26" viewBox="0 0 18 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 1C9 1 3.5 7 3.5 13.5C3.5 17.642 5.91 21 9 21C12.09 21 14.5 17.642 14.5 13.5C14.5 11 12.8 8.8 11.5 7.5C11.5 7.5 12 10.5 10 12.5C10 12.5 10.5 8.5 9 5.5C9 5.5 7 8.5 7.5 11C6 9.5 5 7 5 7C3.5 9 3.5 11.5 3.5 13.5" fill="url(#flame-grad)"/>
+      <path d="M6.5 15C6.5 15 7 17.5 9 18.5C11 17.5 11.5 15 11.5 15C11.5 15 10.5 17 9 17C7.5 17 6.5 15 6.5 15Z" fill="#FFD080" opacity="0.7"/>
+      <defs>
+        <linearGradient id="flame-grad" x1="9" y1="1" x2="9" y2="21" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FFE060"/>
+          <stop offset="35%" stop-color="#FF8020"/>
+          <stop offset="100%" stop-color="#C4622D"/>
+        </linearGradient>
+      </defs>
     </svg>
-    <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.4rem; color:var(--cream); font-weight:400; line-height:1;">
+    <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--cream);font-weight:400;line-height:1;transition:color 0.3s;">
       Ember &amp; Salt
     </span>
   </a>
 
-  <!-- Desktop Nav -->
   <div class="hidden md:flex items-center gap-8">
     {['Menu','About','Reservations','Find Us'].map((item, i) => (
       <a
@@ -49,25 +51,23 @@ import '../styles/global.css';
         onmouseout="this.style.color='var(--cream)'"
       >{item}</a>
     ))}
-    <a href="#reservations" class="btn-terracotta" style="padding:0.6rem 1.4rem; font-size:0.65rem;">Book a Table</a>
+    <a href="#reservations" class="btn-terracotta" style="padding:0.6rem 1.4rem;font-size:0.65rem;">Book a Table</a>
   </div>
 
-  <!-- Mobile Hamburger -->
   <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer border-none bg-transparent" aria-label="Open menu">
-    <span class="hamburger-line block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
-    <span class="hamburger-line block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
-    <span class="hamburger-line block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
+    <span class="block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
+    <span class="block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
+    <span class="block w-6 h-px transition-all duration-300" style="background:var(--cream);"></span>
   </button>
 </nav>
 
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-400" style="background-color:var(--bg-primary);">
+<!-- Mobile overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none" style="background-color:var(--bg-primary);transition:opacity 0.4s ease;">
   <div class="flex flex-col items-center gap-10">
     {['Home','Menu','About','Reservations','Find Us'].map((item, i) => (
-      <a
-        href={`#${['home','menu','about','reservations','find'][i]}`}
-        class="mobile-nav-link no-underline transition-colors duration-300"
-        style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:3rem; color:var(--cream); font-weight:400;"
+      <a href={`#${['home','menu','about','reservations','find'][i]}`}
+        class="mobile-nav-link no-underline"
+        style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:3rem;color:var(--cream);font-weight:400;transition:color 0.3s;"
         onmouseover="this.style.color='var(--terracotta)'"
         onmouseout="this.style.color='var(--cream)'"
       >{item}</a>
@@ -81,26 +81,28 @@ import '../styles/global.css';
      SECTION 1 — HERO
 ═══════════════════════════════════════════ -->
 <section id="home" class="grain relative min-h-screen flex flex-col overflow-hidden" style="background-color:var(--bg-primary);">
-  <!-- Ambient glow -->
-  <div class="ember-glow" style="width:600px;height:600px;top:-100px;right:0;opacity:0.25;"></div>
-  <div class="ember-glow" style="width:300px;height:300px;bottom:100px;left:10%;opacity:0.15;"></div>
 
-  <!-- Main content -->
-  <div class="relative z-10 flex flex-col md:flex-row flex-1 items-center pt-28 pb-10 px-6 md:px-16 gap-10 md:gap-0">
+  <!-- Canvas ember particles -->
+  <canvas id="ember-canvas"></canvas>
+
+  <!-- Ambient glows -->
+  <div class="ember-glow" style="width:700px;height:700px;top:-150px;right:-100px;opacity:0.2;"></div>
+  <div class="ember-glow" style="width:400px;height:400px;bottom:80px;left:5%;opacity:0.12;animation-delay:1.5s;"></div>
+
+  <!-- Main hero content -->
+  <div class="relative z-10 flex flex-col md:flex-row flex-1 items-center pt-28 pb-10 px-6 md:px-16 gap-12 md:gap-0">
 
     <!-- Left 55% -->
     <div class="w-full md:w-[55%] md:pr-12">
       <p class="label-caps mb-6 fade-up" style="color:var(--terracotta);">Berea, Durban</p>
 
-      <div class="overflow-hidden">
-        <h1 class="font-display m-0 leading-none" style="font-family:'Cormorant Garamond',serif;">
-          <span class="block fade-up stagger-1" style="font-size:clamp(64px,9vw,110px); font-style:italic; color:var(--cream); font-weight:400;">Fire.</span>
-          <span class="block fade-up stagger-2" style="font-size:clamp(64px,9vw,110px); font-style:italic; color:var(--terracotta); font-weight:400; padding-left:clamp(20px,3vw,48px);">Flavour.</span>
-          <span class="block fade-up stagger-3" style="font-size:clamp(64px,9vw,110px); font-style:italic; color:var(--cream); font-weight:400;">Florida Road.</span>
-        </h1>
-      </div>
+      <h1 class="m-0 leading-none" style="font-family:'Cormorant Garamond',serif;">
+        <span class="block fade-up stagger-1" style="font-size:clamp(60px,9vw,110px);font-style:italic;color:var(--cream);font-weight:400;">Fire.</span>
+        <span class="block fade-up stagger-2" style="font-size:clamp(60px,9vw,110px);font-style:italic;color:var(--terracotta);font-weight:400;padding-left:clamp(20px,3vw,48px);">Flavour.</span>
+        <span class="block fade-up stagger-3" style="font-size:clamp(60px,9vw,110px);font-style:italic;color:var(--cream);font-weight:400;">Florida Road.</span>
+      </h1>
 
-      <p class="fade-up stagger-4 mt-8 max-w-lg leading-relaxed" style="font-family:'Jost',sans-serif; font-size:1rem; color:var(--cream); opacity:0.85;">
+      <p class="fade-up stagger-4 mt-8 max-w-lg leading-relaxed" style="font-family:'Jost',sans-serif;font-size:1rem;color:var(--cream);opacity:0.8;">
         Wood-fire cooking. Local ingredients. Good people. Ember &amp; Salt is Durban's favourite table — whether you stay for one course or four.
       </p>
 
@@ -110,38 +112,69 @@ import '../styles/global.css';
       </div>
     </div>
 
-    <!-- Right 45% — blob image -->
-    <div class="w-full md:w-[45%] relative flex items-center justify-center" style="min-height:380px;">
-      <!-- Glow behind blob -->
-      <div style="position:absolute;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(196,98,45,0.25) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+    <!-- Right 45% — wood frame + CSS fire -->
+    <div class="w-full md:w-[45%] relative flex items-center justify-center" style="min-height:400px;">
 
-      <!-- Blob shape -->
+      <!-- Outer glow halo -->
+      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,98,45,0.22) 0%,rgba(255,120,0,0.06) 45%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glowPulse 3s ease-in-out infinite;"></div>
+
+      <!-- Wood-framed blob container -->
       <div class="fade-up stagger-3 relative" style="
-        width:min(420px,90vw);
-        height:min(480px,70vw);
-        background-color:var(--bg-warm);
-        clip-path: polygon(15% 0%, 85% 3%, 98% 18%, 95% 82%, 80% 98%, 18% 97%, 2% 80%, 5% 18%);
-        display:flex;align-items:center;justify-content:center;
+        width:min(400px,88vw);
+        height:min(460px,80vw);
+        clip-path:polygon(14% 1%,84% 2%,98% 16%,96% 84%,82% 99%,16% 98%,2% 82%,4% 16%);
         overflow:hidden;
       ">
-        <!-- Grain inside blob -->
-        <div style="position:absolute;inset:0;background-image:url(data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E);background-size:200px;opacity:0.08;"></div>
-        <!-- Decorative fire lines -->
-        <div style="position:absolute;top:20%;left:50%;transform:translateX(-50%);width:2px;height:60%;background:linear-gradient(to bottom,var(--terracotta),transparent);opacity:0.3;"></div>
-        <!-- Text -->
-        <div style="position:relative;z-index:2;text-align:center;padding:2rem;">
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--cream);opacity:0.6;margin:0;">[Food Photography]</p>
-          <p style="font-family:'Jost',sans-serif;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;opacity:0.7;">Coming Soon</p>
+        <!-- Wood grain background -->
+        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.9;"></div>
+
+        <!-- Dark overlay for atmosphere -->
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,4,2,0.6) 0%,rgba(20,8,3,0.3) 40%,rgba(10,4,2,0.7) 100%);"></div>
+
+        <!-- Char burn edges -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,0.55) 100%);"></div>
+
+        <!-- CSS fire sitting on logs -->
+        <div style="position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:100%;display:flex;flex-direction:column;align-items:center;gap:0;">
+
+          <!-- Logs / coals base -->
+          <div style="display:flex;gap:6px;margin-bottom:4px;z-index:2;position:relative;">
+            <div class="ember-coal" style="width:70px;height:16px;transform:rotate(-8deg);"></div>
+            <div class="ember-coal" style="width:80px;height:18px;transform:rotate(5deg) translateY(-3px);"></div>
+            <div class="ember-coal" style="width:60px;height:14px;transform:rotate(-3deg);"></div>
+          </div>
+
+          <!-- The CSS fire -->
+          <div class="css-fire fire-panel-wrap" id="hero-fire" style="width:120px;height:160px;">
+            <div class="fire-glow" style="width:200px;height:100px;"></div>
+            <div class="fire-layer fire-base" style="width:100%;height:100%;"></div>
+            <div class="fire-layer fire-mid"></div>
+            <div class="fire-layer fire-inner"></div>
+            <div class="fire-layer fire-tip"></div>
+          </div>
         </div>
+
+        <!-- Text overlay -->
+        <div style="position:absolute;top:12%;width:100%;text-align:center;padding:0 2rem;">
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cream);opacity:0.55;margin:0;">[Food Photography]</p>
+          <p style="font-family:'Jost',sans-serif;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;opacity:0.6;">Coming Soon</p>
+        </div>
+
+        <!-- Bottom char gradient -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,rgba(5,2,1,0.85),transparent);"></div>
       </div>
+
+      <!-- Small fire detail glow -->
+      <div style="position:absolute;bottom:22%;left:50%;transform:translateX(-50%);width:180px;height:60px;background:radial-gradient(ellipse,rgba(255,100,0,0.4) 0%,transparent 70%);pointer-events:none;animation:glowPulse 1.8s ease-in-out infinite;"></div>
     </div>
   </div>
 
-  <!-- Bottom terracotta line + marquee -->
+  <!-- Plank strip accent above marquee -->
   <div class="relative z-10">
+    <div class="plank-strip"></div>
     <div style="height:1px;background:var(--terracotta);width:100%;"></div>
-    <div style="background-color:var(--bg-secondary);overflow:hidden;padding:0.85rem 0;">
-      <div class="marquee-track" style="color:var(--cream);font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;white-space:nowrap;">
+    <div style="background-color:var(--bg-secondary);overflow:hidden;padding:0.8rem 0;">
+      <div class="marquee-track" style="color:var(--cream);font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;white-space:nowrap;">
         {Array.from({length:4}).map(() => (
           <span style="padding:0 2rem;">WOOD-FIRED &nbsp;◆&nbsp; LOCALLY SOURCED &nbsp;◆&nbsp; BEREA &nbsp;◆&nbsp; OPEN TUES–SUN &nbsp;◆&nbsp; WALK-INS WELCOME &nbsp;◆&nbsp; DURBAN'S FAVOURITE TABLE &nbsp;◆&nbsp;</span>
         ))}
@@ -151,10 +184,8 @@ import '../styles/global.css';
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     WAVY DIVIDER hero → about
-═══════════════════════════════════════════ -->
-<div class="wave-divider" style="background-color:var(--bg-primary); margin-bottom:-2px;">
+<!-- DIVIDER -->
+<div class="wave-divider" style="background-color:var(--bg-primary);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,35 C180,70 360,0 540,35 C720,70 900,0 1080,35 C1260,70 1380,20 1440,35 L1440,70 L0,70 Z" fill="#221408"/>
   </svg>
@@ -167,49 +198,64 @@ import '../styles/global.css';
 <section id="about" style="background-color:var(--bg-secondary);">
   <div class="flex flex-col md:flex-row min-h-[600px]">
 
-    <!-- Left 40% — terracotta image panel -->
-    <div class="w-full md:w-[40%] relative flex items-center justify-center grain" style="background-color:var(--terracotta);min-height:400px;">
-      <div class="ember-glow" style="width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.2;"></div>
+    <!-- Left — wood-grained terracotta panel -->
+    <div class="w-full md:w-[40%] relative flex items-center justify-center" style="min-height:420px;overflow:hidden;">
+      <!-- Wood grain base -->
+      <div class="wood-grain" style="position:absolute;inset:0;"></div>
+      <!-- Terracotta tint over wood -->
+      <div style="position:absolute;inset:0;background:rgba(196,98,45,0.55);"></div>
+      <!-- Char vignette -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 50%,rgba(0,0,0,0.5) 100%);"></div>
+      <!-- Fire glow from bottom -->
+      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:120px;background:radial-gradient(ellipse,rgba(255,140,0,0.3) 0%,transparent 70%);animation:glowPulse 2.5s ease-in-out infinite;pointer-events:none;"></div>
+
       <!-- Organic blob -->
-      <div class="fade-up relative" style="
-        width:min(340px,80vw);
-        height:min(400px,75vw);
-        background-color:rgba(0,0,0,0.2);
-        clip-path: polygon(8% 2%, 88% 0%, 100% 15%, 96% 85%, 88% 100%, 12% 98%, 0% 82%, 4% 15%);
+      <div class="fade-up relative z-10" style="
+        width:min(300px,78vw);
+        height:min(360px,68vw);
+        background:rgba(0,0,0,0.25);
+        clip-path:polygon(8% 2%,88% 0%,100% 15%,96% 85%,88% 100%,12% 98%,0% 82%,4% 15%);
         display:flex;align-items:center;justify-content:center;
-        border:1px solid rgba(245,237,216,0.15);
+        border:1px solid rgba(245,237,216,0.12);
+        overflow:hidden;
       ">
-        <div style="text-align:center;padding:2rem;">
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--cream);opacity:0.7;margin:0;">[Interior Shot]</p>
-          <p style="font-family:'Jost',sans-serif;font-size:0.65rem;color:var(--cream);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;opacity:0.5;">Coming Soon</p>
+        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.5;"></div>
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);"></div>
+        <div style="position:relative;z-index:2;text-align:center;padding:2rem;">
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cream);opacity:0.65;margin:0;">[Interior Shot]</p>
+          <p style="font-family:'Jost',sans-serif;font-size:0.62rem;color:var(--cream);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;opacity:0.4;">Coming Soon</p>
         </div>
       </div>
+
+      <!-- Small wood knot decorations -->
+      <div class="wood-knot" style="position:absolute;top:15%;right:10%;"></div>
+      <div class="wood-knot" style="position:absolute;bottom:20%;left:8%;width:40px;height:28px;"></div>
     </div>
 
-    <!-- Right 60% — content -->
+    <!-- Right — content -->
     <div class="w-full md:w-[60%] flex items-center px-8 md:px-16 py-16 grain" style="background-color:var(--bg-secondary);">
       <div class="max-w-xl">
         <p class="label-caps mb-5 fade-up" style="color:var(--terracotta);">Our Story</p>
 
-        <h2 class="fade-up stagger-1 mt-0 mb-8 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,4.5vw,56px);color:var(--cream);font-weight:400;">
+        <!-- Decorative char line -->
+        <div class="char-plank fade-up" style="width:80px;margin-bottom:1.5rem;"></div>
+
+        <h2 class="fade-up stagger-1 mt-0 mb-8 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(34px,4.5vw,54px);color:var(--cream);font-weight:400;">
           Born from a love of<br/>fire and good company
         </h2>
 
-        <div class="fade-up stagger-2" style="font-family:'Jost',sans-serif;font-size:0.95rem;color:var(--text-secondary);line-height:1.9;">
-          <p>
-            Ember &amp; Salt opened its doors in 2019 in a converted warehouse on Florida Road — one of Durban's most beloved streets. We started with a single wood-fire oven, a small team and a big belief that the best meals happen when great ingredients meet real fire.
-          </p>
-          <p>
-            Five years later we are still cooking over the same flames. Still sourcing from the same KZN farms. Still making every sauce, every bread and every dessert from scratch — every single day.
-          </p>
-          <p>
-            This is not fine dining with rules and white tablecloths. This is good food, warm light and people who are genuinely happy to see you.
-          </p>
+        <div class="fade-up stagger-2" style="font-family:'Jost',sans-serif;font-size:0.93rem;color:var(--text-secondary);line-height:1.9;">
+          <p>Ember &amp; Salt opened its doors in 2019 in a converted warehouse on Florida Road — one of Durban's most beloved streets. We started with a single wood-fire oven, a small team and a big belief that the best meals happen when great ingredients meet real fire.</p>
+          <p>Five years later we are still cooking over the same flames. Still sourcing from the same KZN farms. Still making every sauce, every bread and every dessert from scratch — every single day.</p>
+          <p>This is not fine dining with rules and white tablecloths. This is good food, warm light and people who are genuinely happy to see you.</p>
         </div>
 
-        <div class="fade-up stagger-3 mt-8">
+        <div class="fade-up stagger-3 mt-8 flex items-center gap-4 flex-wrap">
           <span class="pill-badge" style="background-color:rgba(196,98,45,0.15);color:var(--terracotta);border:1px solid rgba(196,98,45,0.3);">
             🔥 Wood-fired since 2019
+          </span>
+          <span class="pill-badge" style="background-color:rgba(61,36,21,0.5);color:var(--text-secondary);border:1px solid var(--border-warm);">
+            🌿 KZN sourced
           </span>
         </div>
       </div>
@@ -217,11 +263,13 @@ import '../styles/global.css';
   </div>
 </section>
 
+<!-- Plank strip transition -->
+<div style="background-color:var(--bg-secondary);padding-bottom:0;">
+  <div class="plank-strip"></div>
+</div>
 
-<!-- ═══════════════════════════════════════════
-     WAVY DIVIDER about → menu
-═══════════════════════════════════════════ -->
-<div class="wave-divider" style="background-color:var(--bg-secondary);margin-bottom:-2px;">
+<!-- DIVIDER -->
+<div class="wave-divider" style="background-color:var(--bg-secondary);margin-bottom:-2px;margin-top:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,20 C240,60 480,0 720,30 C960,60 1200,5 1440,30 L1440,70 L0,70 Z" fill="#2E1A0E"/>
   </svg>
@@ -229,96 +277,85 @@ import '../styles/global.css';
 
 
 <!-- ═══════════════════════════════════════════
-     SECTION 3 — MENU HIGHLIGHTS
+     SECTION 3 — MENU
 ═══════════════════════════════════════════ -->
-<section id="menu" class="grain py-20 px-6 md:px-16" style="background-color:var(--bg-warm);">
-  <div class="max-w-5xl mx-auto">
+<section id="menu" class="grain py-20 px-6 md:px-16 relative" style="background-color:var(--bg-warm);">
 
-    <!-- Header -->
+  <!-- Wood grain side accent bars -->
+  <div class="hidden md:block" style="position:absolute;left:0;top:0;bottom:0;width:8px;" >
+    <div class="wood-grain" style="position:absolute;inset:0;"></div>
+    <div style="position:absolute;inset:0;background:rgba(196,98,45,0.3);"></div>
+  </div>
+  <div class="hidden md:block" style="position:absolute;right:0;top:0;bottom:0;width:8px;">
+    <div class="wood-grain" style="position:absolute;inset:0;"></div>
+    <div style="position:absolute;inset:0;background:rgba(196,98,45,0.3);"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto">
     <div class="text-center mb-16">
       <p class="label-caps mb-4 fade-up" style="color:var(--terracotta);">From the Kitchen</p>
-      <h2 class="fade-up stagger-1 mt-0 mb-4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(40px,5vw,64px);color:var(--cream);font-weight:400;">What We're Cooking</h2>
-      <p class="fade-up stagger-2 max-w-lg mx-auto" style="font-family:'Jost',sans-serif;font-size:0.95rem;color:var(--text-secondary);">A small menu done exceptionally well. Everything wood-fired. Everything fresh.</p>
+      <h2 class="fade-up stagger-1 mt-0 mb-4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(38px,5vw,62px);color:var(--cream);font-weight:400;">What We're Cooking</h2>
+      <p class="fade-up stagger-2 max-w-lg mx-auto" style="font-family:'Jost',sans-serif;font-size:0.93rem;color:var(--text-secondary);">A small menu done exceptionally well. Everything wood-fired. Everything fresh.</p>
     </div>
 
-    <!-- STARTERS -->
-    <div class="mb-14 fade-up">
-      <div class="flex items-center gap-4 mb-8">
-        <span class="label-caps" style="color:var(--terracotta);">Starters</span>
-        <div style="flex:1;height:1px;background:var(--border-warm);"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {[
+    <!-- Charred header for each category -->
+    {[
+      {
+        label: 'Starters',
+        items: [
           {name:'Charred Corn Soup',desc:'Slow roasted KZN corn, smoked cream, chive oil',price:'R85'},
           {name:'Wood-Fired Flatbread',desc:'House starter dough, ember butter, aged balsamic, flaked salt',price:'R65'},
           {name:'Burrata & Heritage Tomato',desc:'Creamy burrata, charred heritage tomatoes, basil oil, sourdough croutons',price:'R120'},
           {name:'Smoked Chicken Wings',desc:'12-hour smoked wings, house hot sauce, blue cheese dip',price:'R110'},
-        ].map((item, i) => (
-          <div class={`menu-item pb-5 fade-up stagger-${i+1}`}>
-            <div class="flex justify-between items-start gap-4">
-              <div>
-                <p class="m-0 mb-1" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--cream);font-weight:400;">{item.name}</p>
-                <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--text-secondary);">{item.desc}</p>
-              </div>
-              <span style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--terracotta);font-weight:500;white-space:nowrap;">{item.price}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- MAINS -->
-    <div class="mb-14 fade-up">
-      <div class="flex items-center gap-4 mb-8">
-        <span class="label-caps" style="color:var(--terracotta);">Mains</span>
-        <div style="flex:1;height:1px;background:var(--border-warm);"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {[
+        ]
+      },
+      {
+        label: 'Mains',
+        items: [
           {name:'The Ember Burger',desc:'Double smash patty, aged cheddar, caramelised onion, house sauce, brioche',price:'R185'},
           {name:'Wood-Fired Linefish',desc:'Catch of the day, lemon butter, charred greens, roast potato',price:'R195'},
           {name:'Braai Pork Ribs',desc:'Full rack 8-hour smoked ribs, house BBQ, coleslaw, fries',price:'R245'},
           {name:'Mushroom & Halloumi Stack',desc:'Portobello, grilled halloumi, roast peppers, chimichurri, sourdough toast',price:'R155'},
-        ].map((item, i) => (
-          <div class={`menu-item pb-5 fade-up stagger-${i+1}`}>
-            <div class="flex justify-between items-start gap-4">
-              <div>
-                <p class="m-0 mb-1" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--cream);font-weight:400;">{item.name}</p>
-                <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--text-secondary);">{item.desc}</p>
-              </div>
-              <span style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--terracotta);font-weight:500;white-space:nowrap;">{item.price}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- DESSERTS -->
-    <div class="mb-12 fade-up">
-      <div class="flex items-center gap-4 mb-8">
-        <span class="label-caps" style="color:var(--terracotta);">Desserts</span>
-        <div style="flex:1;height:1px;background:var(--border-warm);"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {[
+        ]
+      },
+      {
+        label: 'Desserts',
+        items: [
           {name:'Burnt Milk Tart',desc:'House milk tart, cinnamon brûlée top, vanilla cream',price:'R75'},
           {name:'Dark Chocolate Ember Cake',desc:'Warm dark chocolate cake, salted caramel, vanilla bean ice cream',price:'R85'},
-        ].map((item, i) => (
-          <div class={`menu-item pb-5 fade-up stagger-${i+1}`}>
-            <div class="flex justify-between items-start gap-4">
-              <div>
-                <p class="m-0 mb-1" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--cream);font-weight:400;">{item.name}</p>
-                <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.8rem;color:var(--text-secondary);">{item.desc}</p>
-              </div>
-              <span style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--terracotta);font-weight:500;white-space:nowrap;">{item.price}</span>
-            </div>
+        ]
+      },
+    ].map((cat) => (
+      <div class="mb-14 fade-up">
+        <!-- Char plank category header -->
+        <div class="flex items-center gap-4 mb-8">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <!-- Mini flame icon -->
+            <svg width="10" height="14" viewBox="0 0 10 14" fill="none">
+              <path d="M5 0C5 0 1.5 4 1.5 7.5C1.5 9.7 3 11.5 5 11.5C7 11.5 8.5 9.7 8.5 7.5C8.5 6 7.3 4.8 6.5 4C6.5 4 7 5.8 5.8 7C5.8 7 6.2 4.8 5 3C5 3 3.8 4.8 4 6.2C3.2 5.4 2.8 4 2.8 4C2 5 1.5 6.3 1.5 7.5" fill="url(#mf)"/>
+              <defs><linearGradient id="mf" x1="5" y1="0" x2="5" y2="11.5" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFE060"/><stop offset="100%" stop-color="#C4622D"/></linearGradient></defs>
+            </svg>
+            <span class="label-caps" style="color:var(--terracotta);">{cat.label}</span>
           </div>
-        ))}
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--border-warm),transparent);"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {cat.items.map((item, i) => (
+            <div class={`menu-item pb-5 fade-up stagger-${i+1}`}>
+              <div class="flex justify-between items-start gap-4">
+                <div>
+                  <p class="m-0 mb-1" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.22rem;color:var(--cream);font-weight:400;">{item.name}</p>
+                  <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.78rem;color:var(--text-secondary);">{item.desc}</p>
+                </div>
+                <span style="font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--terracotta);font-weight:500;white-space:nowrap;">{item.price}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    ))}
 
-    <!-- Footer note -->
-    <div style="height:1px;background:var(--terracotta);opacity:0.4;margin-bottom:2rem;"></div>
+    <div class="char-plank fade-up" style="margin-bottom:2rem;"></div>
     <p class="text-center fade-up" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-secondary);">
       Menu changes seasonally. Speak to our team about dietary requirements.
     </p>
@@ -326,55 +363,138 @@ import '../styles/global.css';
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     SECTION 4 — EXPERIENCE PANELS
-═══════════════════════════════════════════ -->
+<!-- DIVIDER -->
 <div class="wave-divider" style="background-color:var(--bg-warm);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,40 C360,10 720,65 1080,25 C1260,10 1380,50 1440,35 L1440,70 L0,70 Z" fill="#1A0F0A"/>
   </svg>
 </div>
 
-<section class="flex flex-col md:flex-row" style="min-height:500px;">
 
-  <!-- Panel 1 — Terracotta: The Fire -->
-  <div class="experience-panel w-full md:w-1/3 flex flex-col items-center justify-center px-10 py-16 text-center grain" style="background-color:var(--terracotta);min-height:400px;">
-    <p class="fade-up" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(52px,6vw,80px);color:var(--cream);font-weight:300;margin:0;line-height:1;">The Fire</p>
-    <p class="fade-up stagger-2 mt-6 max-w-xs" style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--cream);opacity:0.85;line-height:1.7;">
-      Our wood-fire oven burns at 400°C. Every dish passes through its flames.
-    </p>
-    <div class="mt-8 fade-up stagger-3">
-      <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 0C20 0 8 12 8 26C8 33.732 13.372 40 20 40C26.628 40 32 33.732 32 26C32 20 28 15 25 12C25 12 26 18 22 22C22 22 23 14 20 8C20 8 16 14 17 20C14 17 12 12 12 12C9 16 8 21 8 26" fill="rgba(245,237,216,0.3)"/>
-      </svg>
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — EXPERIENCE (fire interaction)
+═══════════════════════════════════════════ -->
+<section style="display:flex;flex-direction:column;" class="md:flex-row" id="experience">
+  <style>
+    @media(min-width:768px){
+      #experience{ flex-direction:row!important; }
+    }
+  </style>
+
+  <!-- Panel 1 — FIRE PANEL (interactive) -->
+  <div class="experience-panel fire-panel-wrap w-full md:w-1/3 flex flex-col items-center justify-center px-8 py-16 text-center grain relative overflow-hidden"
+       style="background-color:var(--terracotta);min-height:480px;"
+       id="fire-panel">
+
+    <!-- Wood grain base showing through terracotta -->
+    <div class="wood-grain" style="position:absolute;inset:0;opacity:0.18;"></div>
+    <div style="position:absolute;inset:0;background:rgba(196,98,45,0.82);"></div>
+
+    <!-- Ambient fire glow from bottom -->
+    <div id="fire-panel-glow" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:200px;background:radial-gradient(ellipse,rgba(255,120,0,0.5) 0%,rgba(200,60,0,0.2) 50%,transparent 75%);animation:glowPulse 1.8s ease-in-out infinite;pointer-events:none;transition:all 0.3s;"></div>
+
+    <div class="relative z-10 flex flex-col items-center">
+      <p class="fade-up m-0 mb-4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(46px,6vw,78px);color:var(--cream);font-weight:300;line-height:1;">The Fire</p>
+
+      <!-- Large interactive CSS fire -->
+      <div class="css-fire fire-panel-wrap fade-up stagger-2" id="panel-fire" style="width:90px;height:130px;margin:0.5rem 0 1.2rem;">
+        <div class="fire-glow" style="width:220px;height:110px;"></div>
+        <div class="fire-layer fire-base" style="width:100%;height:100%;"></div>
+        <div class="fire-layer fire-mid"></div>
+        <div class="fire-layer fire-inner"></div>
+        <div class="fire-layer fire-tip"></div>
+      </div>
+
+      <!-- Log base -->
+      <div style="display:flex;gap:5px;margin-bottom:1.5rem;">
+        <div class="ember-coal" style="width:55px;height:12px;transform:rotate(-6deg);"></div>
+        <div class="ember-coal" style="width:65px;height:14px;transform:rotate(4deg) translateY(-2px);"></div>
+        <div class="ember-coal" style="width:50px;height:11px;transform:rotate(-2deg);"></div>
+      </div>
+
+      <p class="fade-up stagger-3 max-w-56" style="font-family:'Jost',sans-serif;font-size:0.83rem;color:var(--cream);opacity:0.88;line-height:1.7;margin:0;">
+        Our wood-fire oven burns at 400°C. Every dish passes through its flames.
+      </p>
+
+      <p class="mt-4 fade-up stagger-4" style="font-family:'Jost',sans-serif;font-size:0.65rem;color:rgba(245,237,216,0.55);letter-spacing:0.12em;text-transform:uppercase;">
+        Hover to stoke the fire
+      </p>
     </div>
+
+    <!-- Char edges -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:6px;" class="char-plank"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:6px;" class="char-plank"></div>
   </div>
 
-  <!-- Panel 2 — Dark: Fire Photography blob -->
-  <div class="experience-panel w-full md:w-1/3 flex items-center justify-center grain" style="background-color:var(--bg-primary);min-height:400px;position:relative;">
-    <div class="ember-glow" style="width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.3;"></div>
-    <div class="fade-up relative" style="
-      width:min(300px,80vw);
-      height:min(340px,70vw);
-      background-color:var(--bg-warm);
-      clip-path: polygon(12% 3%, 90% 0%, 100% 20%, 95% 78%, 85% 100%, 10% 96%, 0% 75%, 5% 22%);
-      display:flex;align-items:center;justify-content:center;
+  <!-- Panel 2 — Wood-grained dark with ember canvas -->
+  <div class="experience-panel w-full md:w-1/3 flex items-center justify-center relative overflow-hidden" style="background-color:var(--bg-primary);min-height:480px;">
+    <!-- Wood grain subtle -->
+    <div class="wood-grain" style="position:absolute;inset:0;opacity:0.4;"></div>
+    <div style="position:absolute;inset:0;background:rgba(26,15,10,0.7);"></div>
+
+    <!-- Mini ember canvas for this panel -->
+    <canvas id="panel-ember-canvas" style="position:absolute;inset:0;pointer-events:none;z-index:3;"></canvas>
+
+    <div class="ember-glow" style="width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.28;z-index:1;"></div>
+
+    <!-- Organic blob with wood interior -->
+    <div class="fade-up relative z-10" style="
+      width:min(280px,75vw);
+      height:min(320px,65vw);
+      clip-path:polygon(12% 3%,90% 0%,100% 20%,95% 78%,85% 100%,10% 96%,0% 75%,5% 22%);
+      overflow:hidden;
     ">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--terracotta);opacity:0.7;margin:0;text-align:center;">[Fire Photography]</p>
+      <div class="wood-grain" style="position:absolute;inset:0;"></div>
+      <div style="position:absolute;inset:0;background:rgba(196,98,45,0.12);"></div>
+      <!-- Char around edges of blob -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
+      <div style="position:absolute;bottom:10%;left:50%;transform:translateX(-50%);width:80px;height:80px;">
+        <!-- Small fire in blob -->
+        <div class="css-fire" style="width:50px;height:70px;position:absolute;bottom:0;left:50%;transform:translateX(-50%);">
+          <div class="fire-layer fire-base" style="width:100%;height:100%;filter:blur(3px);opacity:0.6;"></div>
+          <div class="fire-layer fire-mid"></div>
+          <div class="fire-layer fire-inner"></div>
+        </div>
+      </div>
+      <div style="position:absolute;top:15%;width:100%;text-align:center;padding:0 1.5rem;">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--terracotta);opacity:0.6;margin:0;">[Fire Photography]</p>
+      </div>
     </div>
   </div>
 
-  <!-- Panel 3 — Cream: The Salt -->
-  <div class="experience-panel w-full md:w-1/3 flex flex-col items-center justify-center px-10 py-16 text-center" style="background-color:var(--cream);min-height:400px;">
-    <p class="fade-up" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(52px,6vw,80px);color:var(--text-dark);font-weight:300;margin:0;line-height:1;">The Salt</p>
-    <p class="fade-up stagger-2 mt-6 max-w-xs" style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--text-dark);opacity:0.7;line-height:1.7;">
-      We finish every dish with Knysna fleur de sel. Small detail. Makes everything better.
-    </p>
-    <div class="mt-8 fade-up stagger-3" style="width:48px;height:2px;background-color:var(--terracotta);"></div>
+  <!-- Panel 3 — Cream + wood trim: The Salt -->
+  <div class="experience-panel w-full md:w-1/3 flex flex-col items-center justify-center px-8 py-16 text-center relative overflow-hidden" style="background-color:var(--cream);min-height:480px;">
+    <!-- Subtle wood grain in cream panel -->
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(91deg,transparent 0px,transparent 3px,rgba(180,140,100,0.04) 3px,rgba(180,140,100,0.04) 4px,transparent 4px,transparent 10px),repeating-linear-gradient(180deg,rgba(235,215,185,1) 0px,rgba(245,230,200,1) 30px,rgba(235,215,185,1) 60px);"></div>
+
+    <!-- Wood side bars -->
+    <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--wood-dark),var(--wood-mid),var(--wood-dark));"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--wood-dark),var(--wood-mid),var(--wood-dark));"></div>
+
+    <div class="relative z-10">
+      <p class="fade-up m-0" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(46px,6vw,78px);color:var(--text-dark);font-weight:300;line-height:1;">The Salt</p>
+
+      <!-- Salt crystal SVG -->
+      <div class="fade-up stagger-2 my-5 flex justify-center gap-2 opacity-40">
+        {[14,10,16,8,12].map(s => (
+          <div style={`width:${s}px;height:${s}px;background:var(--text-dark);transform:rotate(45deg);opacity:0.6;`}></div>
+        ))}
+      </div>
+
+      <p class="fade-up stagger-2 max-w-56 mx-auto" style="font-family:'Jost',sans-serif;font-size:0.83rem;color:var(--text-dark);opacity:0.68;line-height:1.7;margin:0;">
+        We finish every dish with Knysna fleur de sel. Small detail. Makes everything better.
+      </p>
+
+      <div class="fade-up stagger-3 mt-6" style="width:48px;height:2px;background-color:var(--terracotta);margin:0 auto;"></div>
+    </div>
+
+    <!-- Char top/bottom strips -->
+    <div style="position:absolute;top:0;left:0;right:0;" class="char-plank"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;" class="char-plank"></div>
   </div>
 </section>
 
-<!-- Wave after panels -->
+<!-- DIVIDER -->
 <div class="wave-divider" style="background-color:var(--cream);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,30 C200,65 450,5 720,40 C990,70 1240,10 1440,40 L1440,70 L0,70 Z" fill="#221408"/>
@@ -385,19 +505,23 @@ import '../styles/global.css';
 <!-- ═══════════════════════════════════════════
      SECTION 5 — RESERVATIONS
 ═══════════════════════════════════════════ -->
-<section id="reservations" class="grain py-20 px-6 md:px-16" style="background-color:var(--bg-secondary);">
+<section id="reservations" class="grain py-20 px-6 md:px-16 relative" style="background-color:var(--bg-secondary);">
+  <!-- Subtle wood accent at left edge -->
+  <div class="hidden md:block" style="position:absolute;left:0;top:0;bottom:0;width:5px;">
+    <div class="wood-grain" style="position:absolute;inset:0;"></div>
+  </div>
+
   <div class="max-w-6xl mx-auto">
     <div class="flex flex-col md:flex-row gap-16 items-start">
 
-      <!-- Left column -->
       <div class="w-full md:w-[45%]">
         <p class="label-caps mb-5 fade-up" style="color:var(--terracotta);">Book a Table</p>
-        <h2 class="fade-up stagger-1 mt-0 mb-6 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(38px,4.5vw,52px);color:var(--cream);font-weight:400;">Come sit with us</h2>
-        <p class="fade-up stagger-2 mb-10" style="font-family:'Jost',sans-serif;font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+        <div class="char-plank fade-up" style="width:60px;margin-bottom:1.2rem;"></div>
+        <h2 class="fade-up stagger-1 mt-0 mb-6 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,4.5vw,52px);color:var(--cream);font-weight:400;">Come sit with us</h2>
+        <p class="fade-up stagger-2 mb-10" style="font-family:'Jost',sans-serif;font-size:0.93rem;color:var(--text-secondary);line-height:1.85;">
           We welcome walk-ins but tables go fast on weekends. Reserve yours online or give us a call — we'd love to have you.
         </p>
 
-        <!-- Contact details -->
         <div class="fade-up stagger-3 space-y-5">
           {[
             {icon:'📞', text:'031 312 0447', href:'tel:+27313120447'},
@@ -406,23 +530,20 @@ import '../styles/global.css';
             {icon:'⏰', text:'Tues—Sun: 12:00 — 22:00 · Closed Mondays'},
           ].map(item => (
             <div class="flex items-start gap-4">
-              <span style="font-size:1.1rem;width:24px;">{item.icon}</span>
+              <span style="font-size:1.1rem;width:24px;flex-shrink:0;">{item.icon}</span>
               {item.href
-                ? <a href={item.href} style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)'">{item.text}</a>
-                : <span style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text-secondary);">{item.text}</span>
+                ? <a href={item.href} style="font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--text-secondary);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)'">{item.text}</a>
+                : <span style="font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--text-secondary);">{item.text}</span>
               }
             </div>
           ))}
         </div>
 
-        <div class="mt-8 fade-up stagger-4">
-          <span class="pill-badge" style="background-color:rgba(196,98,45,0.15);color:var(--terracotta);border:1px solid rgba(196,98,45,0.3);">
-            🚶 Walk-ins always welcome
-          </span>
+        <div class="mt-8 fade-up stagger-4 flex flex-wrap gap-3">
+          <span class="pill-badge" style="background-color:rgba(196,98,45,0.15);color:var(--terracotta);border:1px solid rgba(196,98,45,0.3);">🚶 Walk-ins always welcome</span>
         </div>
       </div>
 
-      <!-- Right column — form -->
       <div class="w-full md:w-[55%]">
         <form class="fade-up stagger-2 space-y-5" onsubmit="handleFormSubmit(event)">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -450,18 +571,14 @@ import '../styles/global.css';
               <label class="label-caps block mb-2" style="color:var(--text-secondary);font-size:0.6rem;">Time</label>
               <select name="time" class="form-input" required>
                 <option value="" disabled selected>Select time</option>
-                {['12:00','13:00','14:00','18:00','19:00','20:00','21:00'].map(t => (
-                  <option value={t}>{t}</option>
-                ))}
+                {['12:00','13:00','14:00','18:00','19:00','20:00','21:00'].map(t => <option value={t}>{t}</option>)}
               </select>
             </div>
             <div>
               <label class="label-caps block mb-2" style="color:var(--text-secondary);font-size:0.6rem;">Number of Guests</label>
               <select name="guests" class="form-input" required>
                 <option value="" disabled selected>Select guests</option>
-                {['1–2 guests','3–4 guests','5–6 guests','7–8 guests','Larger group'].map(g => (
-                  <option value={g}>{g}</option>
-                ))}
+                {['1–2 guests','3–4 guests','5–6 guests','7–8 guests','Larger group'].map(g => <option value={g}>{g}</option>)}
               </select>
             </div>
           </div>
@@ -469,9 +586,7 @@ import '../styles/global.css';
             <label class="label-caps block mb-2" style="color:var(--text-secondary);font-size:0.6rem;">Special Requests</label>
             <textarea name="requests" placeholder="Dietary requirements, special occasions, allergies…" class="form-input"></textarea>
           </div>
-          <button type="submit" class="btn-terracotta w-full text-center" style="border:none;cursor:pointer;">
-            Reserve My Table
-          </button>
+          <button type="submit" class="btn-terracotta w-full text-center" style="border:none;cursor:pointer;">Reserve My Table</button>
           <div id="form-success" style="display:none;text-align:center;padding:1rem;border-radius:9999px;background:rgba(196,98,45,0.1);border:1px solid rgba(196,98,45,0.3);">
             <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--terracotta);margin:0;">Thank you! We'll be in touch shortly. 🔥</p>
           </div>
@@ -482,19 +597,26 @@ import '../styles/global.css';
 </section>
 
 
-<!-- ═══════════════════════════════════════════
-     SECTION 6 — TESTIMONIALS
-═══════════════════════════════════════════ -->
-<!-- Wave top -->
+<!-- DIVIDER -->
 <div class="wave-divider" style="background-color:var(--bg-secondary);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,50 C360,10 720,60 1080,20 C1260,5 1380,50 1440,30 L1440,70 L0,70 Z" fill="#C4622D"/>
   </svg>
 </div>
 
-<section class="grain py-20 px-6 md:px-16" style="background-color:var(--terracotta);">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="fade-up text-center mt-0 mb-14" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(38px,5vw,60px);color:var(--cream);font-weight:400;">
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section class="grain py-20 px-6 md:px-16 relative overflow-hidden" style="background-color:var(--terracotta);">
+  <!-- Wood grain base -->
+  <div class="wood-grain" style="position:absolute;inset:0;opacity:0.15;"></div>
+  <!-- Char accent bars top + bottom -->
+  <div class="char-plank" style="position:absolute;top:0;left:0;right:0;"></div>
+  <div class="char-plank" style="position:absolute;bottom:0;left:0;right:0;"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <h2 class="fade-up text-center mt-0 mb-14" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,5vw,58px);color:var(--cream);font-weight:400;">
       What people are saying
     </h2>
 
@@ -504,15 +626,15 @@ import '../styles/global.css';
         {quote:'Ember & Salt is everything I want in a restaurant. Unpretentious, delicious, warm. The kind of place you tell all your friends about.',author:'James T.',location:'Westville'},
         {quote:'The braai ribs are the best in Durban. No competition. We drove from Ballito on a Wednesday just for those ribs.',author:'The Govender Family',location:'Ballito'},
       ].map((card, i) => (
-        <div class={`testimonial-card p-8 fade-up stagger-${i+1}`}>
-          <div style="font-size:3.5rem;line-height:1;color:var(--terracotta);font-family:'Cormorant Garamond',serif;margin-bottom:0.5rem;">"</div>
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--text-dark);line-height:1.7;margin:0 0 1.5rem;">
-            {card.quote}
-          </p>
-          <div>
-            <p style="font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:600;color:var(--text-dark);margin:0;">— {card.author}</p>
-            <p style="font-family:'Jost',sans-serif;font-size:0.75rem;color:var(--terracotta);margin:0.2rem 0 0.5rem;">{card.location}</p>
-            <p style="color:var(--gold);font-size:0.8rem;margin:0;">★★★★★</p>
+        <div class={`testimonial-card p-8 fade-up stagger-${i+1} relative overflow-hidden`}>
+          <!-- Subtle wood grain in card -->
+          <div style="position:absolute;inset:0;opacity:0.04;background:repeating-linear-gradient(180deg,rgba(100,60,20,1) 0px,rgba(140,90,40,1) 20px,rgba(100,60,20,1) 40px);"></div>
+          <div style="position:relative;z-index:2;">
+            <div style="font-size:3.5rem;line-height:1;color:var(--terracotta);font-family:'Cormorant Garamond',serif;margin-bottom:0.5rem;">"</div>
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.12rem;color:var(--text-dark);line-height:1.7;margin:0 0 1.5rem;">{card.quote}</p>
+            <p style="font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:600;color:var(--text-dark);margin:0;">— {card.author}</p>
+            <p style="font-family:'Jost',sans-serif;font-size:0.73rem;color:var(--terracotta);margin:0.2rem 0 0.4rem;">{card.location}</p>
+            <p style="color:var(--gold);font-size:0.78rem;margin:0;">★★★★★</p>
           </div>
         </div>
       ))}
@@ -520,7 +642,7 @@ import '../styles/global.css';
   </div>
 </section>
 
-<!-- Wave bottom -->
+<!-- DIVIDER -->
 <div class="wave-divider" style="background-color:var(--terracotta);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,25 C300,65 600,5 900,40 C1100,60 1300,15 1440,35 L1440,70 L0,70 Z" fill="#1A0F0A"/>
@@ -531,15 +653,21 @@ import '../styles/global.css';
 <!-- ═══════════════════════════════════════════
      SECTION 7 — FIND US
 ═══════════════════════════════════════════ -->
-<section id="find" class="grain py-20 px-6 md:px-16" style="background-color:var(--bg-primary);">
+<section id="find" class="grain py-20 px-6 md:px-16 relative" style="background-color:var(--bg-primary);">
+  <!-- Wood grain panel accents -->
+  <div class="hidden md:block" style="position:absolute;right:0;top:0;bottom:0;width:6px;">
+    <div class="wood-grain" style="position:absolute;inset:0;"></div>
+    <div style="position:absolute;inset:0;background:rgba(196,98,45,0.25);"></div>
+  </div>
+
   <div class="max-w-6xl mx-auto">
     <div class="flex flex-col md:flex-row gap-16 items-start">
 
-      <!-- Left -->
       <div class="w-full md:w-[45%]">
         <p class="label-caps mb-5 fade-up" style="color:var(--terracotta);">Find Us</p>
-        <h2 class="fade-up stagger-1 mt-0 mb-6 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(36px,4vw,50px);color:var(--cream);font-weight:400;">47 Florida Road, Berea</h2>
-        <p class="fade-up stagger-2 mb-10" style="font-family:'Jost',sans-serif;font-size:0.95rem;color:var(--text-secondary);line-height:1.8;">
+        <div class="char-plank fade-up" style="width:60px;margin-bottom:1.2rem;"></div>
+        <h2 class="fade-up stagger-1 mt-0 mb-6 leading-tight" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(34px,4vw,48px);color:var(--cream);font-weight:400;">47 Florida Road, Berea</h2>
+        <p class="fade-up stagger-2 mb-10" style="font-family:'Jost',sans-serif;font-size:0.93rem;color:var(--text-secondary);line-height:1.85;">
           We are on one of Durban's most iconic streets — Florida Road in Berea. Look for the warm light and the smell of wood smoke. There is parking on the road and in the lot behind us.
         </p>
 
@@ -550,48 +678,29 @@ import '../styles/global.css';
             {icon:'✉️', text:'hello@emberandsalt.co.za', href:'mailto:hello@emberandsalt.co.za'},
           ].map(item => (
             <div class="flex items-start gap-4">
-              <span style="font-size:1.1rem;width:24px;">{item.icon}</span>
+              <span style="font-size:1.1rem;width:24px;flex-shrink:0;">{item.icon}</span>
               {item.href
-                ? <a href={item.href} style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)'">{item.text}</a>
-                : <span style="font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text-secondary);">{item.text}</span>
+                ? <a href={item.href} style="font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--text-secondary);text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)'">{item.text}</a>
+                : <span style="font-family:'Jost',sans-serif;font-size:0.88rem;color:var(--text-secondary);">{item.text}</span>
               }
             </div>
           ))}
         </div>
 
-        <!-- Social links -->
-        <div class="fade-up stagger-4 flex items-center gap-5">
+        <div class="fade-up stagger-4 flex items-center gap-4 flex-wrap">
           <span class="label-caps" style="color:var(--text-secondary);font-size:0.6rem;">Follow us</span>
-          {[
-            {label:'Instagram', icon:'📷'},
-            {label:'TikTok', icon:'🎵'},
-            {label:'Facebook', icon:'👤'},
-          ].map(s => (
-            <a href="#" class="pill-badge" style="background:rgba(196,98,45,0.1);color:var(--text-secondary);border:1px solid var(--border-warm);transition:all 0.3s;text-decoration:none;" onmouseover="this.style.color='var(--terracotta)';this.style.borderColor='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='var(--border-warm)'">
-              {s.icon} {s.label}
-            </a>
+          {[{l:'Instagram',i:'📷'},{l:'TikTok',i:'🎵'},{l:'Facebook',i:'👤'}].map(s => (
+            <a href="#" class="pill-badge" style="background:rgba(196,98,45,0.1);color:var(--text-secondary);border:1px solid var(--border-warm);text-decoration:none;transition:all 0.3s;" onmouseover="this.style.color='var(--terracotta)';this.style.borderColor='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='var(--border-warm)'">{s.i} {s.l}</a>
           ))}
         </div>
       </div>
 
-      <!-- Right — map placeholder -->
       <div class="w-full md:w-[55%] fade-up stagger-2">
-        <div style="
-          border-radius:20px;
-          border:2px solid var(--terracotta);
-          overflow:hidden;
-          aspect-ratio:4/3;
-          background-color:var(--bg-warm);
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          position:relative;
-        ">
-          <!-- Grain on map -->
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--bg-secondary),var(--bg-warm));"></div>
-          <div style="position:absolute;inset:0;" class="grain"></div>
-          <!-- Grid lines to suggest map -->
-          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.08;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wood-framed map -->
+        <div style="border-radius:16px;border:3px solid var(--wood-mid);box-shadow:0 0 0 1px var(--terracotta),6px 6px 0 var(--wood-dark);overflow:hidden;aspect-ratio:4/3;background-color:var(--bg-warm);display:flex;align-items:center;justify-content:center;position:relative;">
+          <div class="wood-grain" style="position:absolute;inset:0;opacity:0.6;"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,15,10,0.6),rgba(46,26,14,0.4));"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.1;" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#C4622D" stroke-width="0.5"/>
@@ -599,19 +708,19 @@ import '../styles/global.css';
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)"/>
           </svg>
-          <!-- Map road line -->
-          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.2;" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="50%" x2="100%" y2="48%" stroke="#C4622D" stroke-width="4"/>
-            <line x1="30%" y1="0" x2="32%" y2="100%" stroke="#C4622D" stroke-width="3"/>
-            <line x1="70%" y1="0" x2="68%" y2="100%" stroke="#C4622D" stroke-width="2"/>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.25;" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="52%" x2="100%" y2="48%" stroke="#C4622D" stroke-width="4"/>
+            <line x1="32%" y1="0" x2="30%" y2="100%" stroke="#C4622D" stroke-width="3"/>
+            <line x1="68%" y1="0" x2="70%" y2="100%" stroke="#C4622D" stroke-width="2"/>
           </svg>
+          <!-- Map pin dot -->
+          <div style="position:absolute;top:45%;left:31%;width:16px;height:16px;background:var(--terracotta);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 12px rgba(196,98,45,0.7);animation:glowPulse 2s ease-in-out infinite;"></div>
           <div style="position:relative;z-index:2;text-align:center;padding:2rem;">
-            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--cream);margin:0;opacity:0.8;">[Map — Florida Road, Berea, Durban]</p>
-            <p style="font-family:'Jost',sans-serif;font-size:0.65rem;color:var(--terracotta);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem;opacity:0.7;">Google Maps</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--cream);margin:0;opacity:0.75;">[Map — Florida Road, Berea, Durban]</p>
+            <p style="font-family:'Jost',sans-serif;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;opacity:0.6;">Google Maps</p>
           </div>
         </div>
 
-        <!-- Pill badges below map -->
         <div class="flex flex-wrap gap-3 mt-5">
           <span class="pill-badge" style="background-color:rgba(196,98,45,0.1);color:var(--terracotta);border:1px solid rgba(196,98,45,0.3);">🚗 Street parking available</span>
           <span class="pill-badge" style="background-color:rgba(196,98,45,0.1);color:var(--terracotta);border:1px solid rgba(196,98,45,0.3);">🚶 5 min from Berea Centre</span>
@@ -625,28 +734,35 @@ import '../styles/global.css';
 <!-- ═══════════════════════════════════════════
      FOOTER
 ═══════════════════════════════════════════ -->
-<!-- Wave top of footer -->
 <div class="wave-divider" style="background-color:var(--bg-primary);margin-bottom:-2px;">
   <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0,35 C240,70 480,5 720,40 C960,70 1200,15 1440,40 L1440,70 L0,70 Z" fill="#221408"/>
   </svg>
 </div>
 
-<footer class="grain py-16 px-6 md:px-16" style="background-color:var(--bg-secondary);">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+<footer class="grain py-16 px-6 md:px-16 relative" style="background-color:var(--bg-secondary);">
+  <!-- Wood grain footer base -->
+  <div class="wood-grain" style="position:absolute;inset:0;opacity:0.25;"></div>
+  <div style="position:absolute;inset:0;background:rgba(34,20,8,0.85);"></div>
+  <div class="char-plank" style="position:absolute;top:0;left:0;right:0;"></div>
 
-      <!-- Col 1 -->
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
       <div>
-        <p class="m-0 mb-3" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.75rem;color:var(--cream);font-weight:400;">Ember &amp; Salt</p>
-        <p class="m-0 mb-1" style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--text-secondary);">🔥 Florida Road, Berea, Durban</p>
-        <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.75rem;color:var(--terracotta);font-style:italic;">Wood-fired since 2019</p>
+        <div class="flex items-center gap-2 mb-3">
+          <svg class="nav-flame" width="14" height="20" viewBox="0 0 18 26" fill="none">
+            <path d="M9 1C9 1 3.5 7 3.5 13.5C3.5 17.642 5.91 21 9 21C12.09 21 14.5 17.642 14.5 13.5C14.5 11 12.8 8.8 11.5 7.5C11.5 7.5 12 10.5 10 12.5C10 12.5 10.5 8.5 9 5.5C9 5.5 7 8.5 7.5 11C6 9.5 5 7 5 7C3.5 9 3.5 11.5 3.5 13.5" fill="url(#fg2)"/>
+            <defs><linearGradient id="fg2" x1="9" y1="1" x2="9" y2="21" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFE060"/><stop offset="100%" stop-color="#C4622D"/></linearGradient></defs>
+          </svg>
+          <p class="m-0" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.7rem;color:var(--cream);font-weight:400;">Ember &amp; Salt</p>
+        </div>
+        <p class="m-0 mb-1" style="font-family:'Jost',sans-serif;font-size:0.83rem;color:var(--text-secondary);">Florida Road, Berea, Durban</p>
+        <p class="m-0" style="font-family:'Jost',sans-serif;font-size:0.72rem;color:var(--terracotta);font-style:italic;">Wood-fired since 2019</p>
       </div>
 
-      <!-- Col 2 -->
       <div>
         <p class="label-caps mb-5 m-0" style="color:var(--terracotta);">Hours</p>
-        <div style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--text-secondary);line-height:2;">
+        <div style="font-family:'Jost',sans-serif;font-size:0.83rem;color:var(--text-secondary);line-height:2.1;">
           <div class="flex justify-between"><span>Tuesday — Friday</span><span>12:00 — 22:00</span></div>
           <div class="flex justify-between"><span>Saturday</span><span>11:00 — 23:00</span></div>
           <div class="flex justify-between"><span>Sunday</span><span>11:00 — 21:00</span></div>
@@ -654,10 +770,9 @@ import '../styles/global.css';
         </div>
       </div>
 
-      <!-- Col 3 -->
       <div>
         <p class="label-caps mb-5 m-0" style="color:var(--terracotta);">Find Us</p>
-        <div style="font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--text-secondary);line-height:2.1;">
+        <div style="font-family:'Jost',sans-serif;font-size:0.83rem;color:var(--text-secondary);line-height:2.1;">
           <p class="m-0">47 Florida Road, Berea</p>
           <p class="m-0">Durban, 4001</p>
           <a href="tel:+27313120447" class="block no-underline" style="color:var(--text-secondary);transition:color 0.3s;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--text-secondary)'">031 312 0447</a>
@@ -667,14 +782,9 @@ import '../styles/global.css';
       </div>
     </div>
 
-    <!-- Bottom bar -->
     <div style="border-top:1px solid var(--terracotta);padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
-      <p style="font-family:'Jost',sans-serif;font-size:0.75rem;color:var(--text-secondary);margin:0;">
-        © 2026 Ember &amp; Salt. All rights reserved. Berea, Durban.
-      </p>
-      <a href="https://webafy.co.za" target="_blank" rel="noopener" style="font-family:'Jost',sans-serif;font-size:0.75rem;color:var(--terracotta);text-decoration:none;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-        Website by Webafy — webafy.co.za
-      </a>
+      <p style="font-family:'Jost',sans-serif;font-size:0.72rem;color:var(--text-secondary);margin:0;">© 2026 Ember &amp; Salt. All rights reserved. Berea, Durban.</p>
+      <a href="https://webafy.co.za" target="_blank" rel="noopener" style="font-family:'Jost',sans-serif;font-size:0.72rem;color:var(--terracotta);text-decoration:none;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Website by Webafy — webafy.co.za</a>
     </div>
   </div>
 </footer>
@@ -684,82 +794,186 @@ import '../styles/global.css';
      SCRIPTS
 ═══════════════════════════════════════════ -->
 <script>
-// ── Nav scroll behavior ──────────────────────
+// ── Nav scroll ───────────────────────────────
 const nav = document.getElementById('main-nav')!;
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-// ── Hamburger menu ───────────────────────────
+// ── Hamburger ────────────────────────────────
 const hamburger = document.getElementById('hamburger')!;
 const mobileMenu = document.getElementById('mobile-menu')!;
-const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 let menuOpen = false;
-
 hamburger.addEventListener('click', () => {
   menuOpen = !menuOpen;
-  if (menuOpen) {
-    mobileMenu.style.opacity = '1';
-    mobileMenu.style.pointerEvents = 'all';
-    document.body.style.overflow = 'hidden';
-  } else {
-    closeMobileMenu();
-  }
+  mobileMenu.style.opacity = menuOpen ? '1' : '0';
+  mobileMenu.style.pointerEvents = menuOpen ? 'all' : 'none';
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
 });
+document.querySelectorAll('.mobile-nav-link').forEach(l =>
+  l.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.style.opacity = '0';
+    mobileMenu.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+  })
+);
 
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => closeMobileMenu());
-});
-
-function closeMobileMenu() {
-  menuOpen = false;
-  mobileMenu.style.opacity = '0';
-  mobileMenu.style.pointerEvents = 'none';
-  document.body.style.overflow = '';
-}
-
-// ── Intersection Observer fade-up ────────────
-const fadeEls = document.querySelectorAll('.fade-up');
+// ── Intersection observer fade-up ────────────
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-fadeEls.forEach(el => observer.observe(el));
-
-// ── Reservation form ─────────────────────────
+// ── Form submit ──────────────────────────────
 function handleFormSubmit(e: Event) {
   e.preventDefault();
-  const successEl = document.getElementById('form-success')!;
+  const success = document.getElementById('form-success')!;
   const form = e.target as HTMLFormElement;
-  form.querySelectorAll('input, select, textarea, button').forEach((el: any) => el.disabled = true);
-  successEl.style.display = 'block';
-  successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  (form.querySelectorAll('input,select,textarea,button') as NodeListOf<HTMLInputElement>).forEach(el => el.disabled = true);
+  success.style.display = 'block';
+  success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
-
-// Make it globally available
 (window as any).handleFormSubmit = handleFormSubmit;
 
 // ── Parallax on experience panels ───────────
 const panels = document.querySelectorAll<HTMLElement>('.experience-panel');
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
   panels.forEach((panel, i) => {
     const rect = panel.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      const offset = (rect.top / window.innerHeight) * 15 * (i % 2 === 0 ? 1 : -1);
+      const offset = (rect.top / window.innerHeight) * 18 * (i % 2 === 0 ? 1 : -1);
       panel.style.transform = `translateY(${offset}px)`;
     }
   });
 }, { passive: true });
+
+// ════════════════════════════════════════════════
+// EMBER PARTICLE SYSTEM (canvas)
+// ════════════════════════════════════════════════
+interface Ember {
+  x: number; y: number; vx: number; vy: number;
+  size: number; life: number; maxLife: number;
+  color: string; rotation: number; rotVel: number;
+}
+
+function makeEmberSystem(canvasId: string, containerEl: HTMLElement | null, density = 1) {
+  const canvas = document.getElementById(canvasId) as HTMLCanvasElement | null;
+  if (!canvas || !containerEl) return;
+  const ctx = canvas.getContext('2d')!;
+  let embers: Ember[] = [];
+  const COLORS = ['#FF8020','#FFA040','#FFB830','#FFD060','#FF6010','#C4622D','#E07848'];
+
+  function resize() {
+    canvas.width = containerEl.offsetWidth;
+    canvas.height = containerEl.offsetHeight;
+  }
+  resize();
+  new ResizeObserver(resize).observe(containerEl);
+
+  function spawnEmber(x?: number, y?: number) {
+    const W = canvas.width, H = canvas.height;
+    embers.push({
+      x: x ?? W * 0.4 + Math.random() * W * 0.25,
+      y: y ?? H * 0.75 + Math.random() * H * 0.15,
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: -(Math.random() * 2.5 + 1.2),
+      size: Math.random() * 3 + 1,
+      life: 0,
+      maxLife: Math.random() * 120 + 80,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rotation: Math.random() * Math.PI * 2,
+      rotVel: (Math.random() - 0.5) * 0.15,
+    });
+  }
+
+  let frame = 0;
+  function tick() {
+    requestAnimationFrame(tick);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frame++;
+    if (frame % Math.max(1, Math.round(4 / density)) === 0) spawnEmber();
+
+    embers = embers.filter(e => e.life < e.maxLife);
+    embers.forEach(e => {
+      e.life++;
+      e.x += e.vx + Math.sin(e.life * 0.06) * 0.4;
+      e.y += e.vy;
+      e.vy *= 0.993;
+      e.rotation += e.rotVel;
+      const alpha = Math.max(0, 1 - (e.life / e.maxLife) ** 1.4);
+      const sz = e.size * (1 - e.life / e.maxLife * 0.5);
+
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.85;
+      ctx.translate(e.x, e.y);
+      ctx.rotate(e.rotation);
+
+      // Glow
+      const grd = ctx.createRadialGradient(0, 0, 0, 0, 0, sz * 3);
+      grd.addColorStop(0, e.color);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(0, 0, sz * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core ember dot
+      ctx.fillStyle = '#FFFACC';
+      ctx.beginPath();
+      ctx.arc(0, 0, sz * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+  tick();
+
+  // Mouse interaction — hero canvas only
+  if (canvasId === 'ember-canvas') {
+    containerEl.addEventListener('mousemove', (ev: MouseEvent) => {
+      const rect = containerEl.getBoundingClientRect();
+      const mx = ev.clientX - rect.left;
+      const my = ev.clientY - rect.top;
+      if (Math.random() < 0.3) spawnEmber(mx + (Math.random()-0.5)*30, my + (Math.random()-0.5)*20);
+    }, { passive: true });
+  }
+}
+
+// Init both canvases once DOM is ready
+const heroSection = document.getElementById('home');
+makeEmberSystem('ember-canvas', heroSection, 1.5);
+
+const panelSection = document.querySelector('.experience-panel:nth-child(2)') as HTMLElement | null;
+makeEmberSystem('panel-ember-canvas', panelSection, 0.6);
+
+// ════════════════════════════════════════════════
+// FIRE PANEL HOVER — stoke the fire
+// ════════════════════════════════════════════════
+const firePanel = document.getElementById('fire-panel');
+const panelFire = document.getElementById('panel-fire');
+const fireGlow  = document.getElementById('fire-panel-glow');
+
+firePanel?.addEventListener('mouseenter', () => {
+  if (panelFire) {
+    panelFire.style.width = '120px';
+    panelFire.style.height = '170px';
+    panelFire.style.transition = 'width 0.4s ease, height 0.4s ease';
+  }
+  if (fireGlow) {
+    fireGlow.style.width = '400px';
+    fireGlow.style.opacity = '1';
+  }
+});
+firePanel?.addEventListener('mouseleave', () => {
+  if (panelFire) {
+    panelFire.style.width = '90px';
+    panelFire.style.height = '130px';
+  }
+  if (fireGlow) {
+    fireGlow.style.width = '300px';
+    fireGlow.style.opacity = '0.6';
+  }
+});
 </script>
 
 </body>
