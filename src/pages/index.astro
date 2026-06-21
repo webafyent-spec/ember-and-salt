@@ -607,21 +607,16 @@ import '../styles/global.css';
       clip-path:polygon(12% 3%,90% 0%,100% 20%,95% 78%,85% 100%,10% 96%,0% 75%,5% 22%);
       overflow:hidden;
     ">
-      <div class="wood-grain" style="position:absolute;inset:0;"></div>
-      <div style="position:absolute;inset:0;background:rgba(196,98,45,0.12);"></div>
-      <!-- Char around edges of blob -->
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
-      <div style="position:absolute;bottom:10%;left:50%;transform:translateX(-50%);width:80px;height:80px;">
-        <!-- Small fire in blob -->
-        <div class="css-fire" style="width:50px;height:70px;position:absolute;bottom:0;left:50%;transform:translateX(-50%);">
-          <div class="fire-layer fire-base" style="width:100%;height:100%;filter:blur(3px);opacity:0.6;"></div>
-          <div class="fire-layer fire-mid"></div>
-          <div class="fire-layer fire-inner"></div>
-        </div>
-      </div>
-      <div style="position:absolute;top:15%;width:100%;text-align:center;padding:0 1.5rem;">
-        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--terracotta);opacity:0.6;margin:0;">[Fire Photography]</p>
-      </div>
+      <!-- Fire photograph -->
+      <img
+        src="/fire-photo.webp"
+        alt="Wood fire burning at Ember & Salt"
+        loading="lazy"
+        decoding="async"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;"
+      />
+      <!-- Slight darkening vignette so edges bleed into the dark panel -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(0,0,0,0.55) 100%);"></div>
     </div>
   </div>
 
