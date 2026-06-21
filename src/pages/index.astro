@@ -125,14 +125,23 @@ import '../styles/global.css';
         clip-path:polygon(14% 1%,84% 2%,98% 16%,96% 84%,82% 99%,16% 98%,2% 82%,4% 16%);
         overflow:hidden;
       ">
-        <!-- Wood grain base -->
-        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.85;"></div>
+        <!-- Food photography fill -->
+        <img
+          src="/hero-food.webp"
+          alt="Wood-fired tomahawk steak at Ember & Salt"
+          loading="eager"
+          decoding="async"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;"
+        />
 
-        <!-- Very dark cave atmosphere — fire is the only light source -->
-        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,1,0,0.88) 0%,rgba(8,3,1,0.55) 45%,rgba(4,1,0,0.35) 100%);"></div>
+        <!-- Dark cinematic overlay so fire reads clearly on top -->
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,1,0,0.55) 0%,rgba(8,3,1,0.25) 40%,rgba(4,1,0,0.5) 100%);"></div>
+
+        <!-- Warm terracotta colour-grade wash -->
+        <div style="position:absolute;inset:0;background:rgba(80,20,0,0.18);mix-blend-mode:multiply;"></div>
 
         <!-- Char vignette around edges -->
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 42%,rgba(0,0,0,0.72) 100%);"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 38%,rgba(0,0,0,0.75) 100%);"></div>
 
         <!-- ── FIRE SCENE ───────────────────────── -->
         <!-- Everything is positioned from the bottom, anchored to the coal bed -->
@@ -340,16 +349,22 @@ import '../styles/global.css';
 <section id="about" style="background-color:var(--bg-secondary);">
   <div class="flex flex-col md:flex-row min-h-[600px]">
 
-    <!-- Left — wood-grained terracotta panel -->
+    <!-- Left — interior photo panel -->
     <div class="w-full md:w-[40%] relative flex items-center justify-center" style="min-height:420px;overflow:hidden;">
-      <!-- Wood grain base -->
-      <div class="wood-grain" style="position:absolute;inset:0;"></div>
-      <!-- Terracotta tint over wood -->
-      <div style="position:absolute;inset:0;background:rgba(196,98,45,0.55);"></div>
-      <!-- Char vignette -->
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 50%,rgba(0,0,0,0.5) 100%);"></div>
-      <!-- Fire glow from bottom -->
-      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:120px;background:radial-gradient(ellipse,rgba(255,140,0,0.3) 0%,transparent 70%);animation:glowPulse 2.5s ease-in-out infinite;pointer-events:none;"></div>
+      <!-- Full-bleed interior photo -->
+      <img
+        src="/interior.webp"
+        alt="Ember & Salt — warm candlelit dining room"
+        loading="lazy"
+        decoding="async"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;"
+      />
+      <!-- Warm terracotta grade -->
+      <div style="position:absolute;inset:0;background:rgba(120,35,5,0.32);mix-blend-mode:multiply;"></div>
+      <!-- Dark vignette keeps edges moody -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
+      <!-- Subtle fire glow from bottom — ties to the restaurant's oven -->
+      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:120px;background:radial-gradient(ellipse,rgba(255,140,0,0.25) 0%,transparent 70%);animation:glowPulse 2.5s ease-in-out infinite;pointer-events:none;"></div>
 
       <!-- Organic blob -->
       <div class="fade-up relative z-10" style="
@@ -361,12 +376,18 @@ import '../styles/global.css';
         border:1px solid rgba(245,237,216,0.12);
         overflow:hidden;
       ">
-        <div class="wood-grain" style="position:absolute;inset:0;opacity:0.5;"></div>
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);"></div>
-        <div style="position:relative;z-index:2;text-align:center;padding:2rem;">
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cream);opacity:0.65;margin:0;">[Interior Shot]</p>
-          <p style="font-family:'Jost',sans-serif;font-size:0.62rem;color:var(--cream);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;opacity:0.4;">Coming Soon</p>
-        </div>
+        <!-- Interior photography -->
+        <img
+          src="/interior.webp"
+          alt="Ember & Salt dining room — warm candlelit interior"
+          loading="lazy"
+          decoding="async"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;"
+        />
+        <!-- Terracotta colour grade over photo -->
+        <div style="position:absolute;inset:0;background:rgba(130,40,5,0.28);mix-blend-mode:multiply;"></div>
+        <!-- Edge vignette -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,0.55) 100%);"></div>
       </div>
 
       <!-- Small wood knot decorations -->
