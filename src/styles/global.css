@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #1A0F0A;
+  --bg-secondary: #221408;
+  --bg-warm: #2E1A0E;
+  --terracotta: #C4622D;
+  --terracotta-light: #E07848;
+  --cream: #F5EDD8;
+  --cream-dark: #E8D9BC;
+  --gold: #D4A853;
+  --text-primary: #F5EDD8;
+  --text-secondary: #B8A080;
+  --text-dark: #1A0F0A;
+  --border-warm: #3D2415;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Jost', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE GRAIN TEXTURE ─────────────────── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── TYPOGRAPHY ──────────────────────────── */
+.font-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+.font-body {
+  font-family: 'Jost', sans-serif;
+}
+.label-caps {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── ANIMATIONS ──────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.6; }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.25s; }
+.stagger-3 { transition-delay: 0.4s; }
+.stagger-4 { transition-delay: 0.55s; }
+.stagger-5 { transition-delay: 0.7s; }
+.stagger-6 { transition-delay: 0.85s; }
+
+/* ─── MARQUEE ─────────────────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── WAVY DIVIDERS ───────────────────────── */
+.wave-divider {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-divider svg {
+  display: block;
+  width: 100%;
+}
+
+/* ─── BUTTONS ─────────────────────────────── */
+.btn-terracotta {
+  display: inline-block;
+  background-color: var(--terracotta);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.35s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.btn-terracotta:hover {
+  background-color: #a8521f;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--cream);
+  cursor: pointer;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background-color: var(--cream);
+  color: var(--text-dark);
+}
+
+/* ─── PILL BADGE ──────────────────────────── */
+.pill-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ─── FORM ────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background-color: var(--bg-primary);
+  color: var(--cream);
+  border: 1.5px solid var(--border-warm);
+  border-radius: 9999px;
+  padding: 0.85rem 1.4rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  -webkit-appearance: none;
+}
+.form-input::placeholder {
+  color: var(--text-secondary);
+}
+.form-input:focus {
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(196, 98, 45, 0.15);
+}
+.form-input option {
+  background-color: var(--bg-secondary);
+  color: var(--cream);
+}
+textarea.form-input {
+  border-radius: 1.2rem;
+  resize: vertical;
+  min-height: 110px;
+}
+
+/* ─── NAV ─────────────────────────────────── */
+#main-nav {
+  transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+#main-nav.scrolled {
+  background-color: var(--bg-primary);
+  border-bottom: 2px solid var(--terracotta);
+}
+
+/* ─── BLOB ────────────────────────────────── */
+.blob-clip {
+  clip-path: ellipse(48% 45% at 50% 50%);
+}
+.blob-clip-2 {
+  clip-path: polygon(
+    10% 0%, 85% 5%, 100% 20%,
+    95% 80%, 85% 100%, 15% 95%,
+    0% 75%, 5% 20%
+  );
+}
+
+/* ─── GLOW ────────────────────────────────── */
+.ember-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,98,45,0.35) 0%, transparent 70%);
+  animation: glowPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── EXPERIENCE PANELS ───────────────────── */
+.experience-panel {
+  transition: transform 0.35s ease;
+}
+.experience-panel:hover {
+  transform: scale(1.01);
+}
+
+/* ─── TESTIMONIAL CARD ────────────────────── */
+.testimonial-card {
+  background-color: var(--cream);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.28);
+}
+
+/* ─── MENU ITEM ───────────────────────────── */
+.menu-item {
+  border-bottom: 1px solid var(--border-warm);
+  padding-bottom: 1rem;
+}
+
+/* ─── SCROLLBAR ───────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--terracotta); }
